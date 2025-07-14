@@ -1,0 +1,52 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    background-color: #f3f3f3;
+}
+
+
+.header-card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 400px;
+    /* padding: 0 10px; */
+}
+
+.header-saveFileButton,
+.header-uploadFileButton {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 8px;
+    margin: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+.header-saveFileButton:hover,
+.header-uploadFileButton:hover {
+    background-color: #005fa3;
+}
+
+
+.header-uploadFile {
+    display: none;
+}
+
+.header-logo {
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    flex-grow: 1;
+}
