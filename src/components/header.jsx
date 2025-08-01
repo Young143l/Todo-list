@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "../css/header.css";
 class Header extends React.Component {
     uploadFile = React.createRef();
@@ -6,21 +7,25 @@ class Header extends React.Component {
     //读取数据文件
     readFile() {
         const file = this.uploadFile.current.files[0];
-        console.log(file);
         if (!file) {
             return;
         }
         const reader = new FileReader();
         reader.onload = (event) => {
             const content = event.target.result;
-
             if (file.name.endsWith('.json')) {
                 try {
-                    const list = JSON.parse(content);
-                    this.props.todo.current.saveList(list);
+                    const data = JSON.parse(content);
+                    if (data.type === "todo") {
+                        this.props.saveList(data.list);
+                    } else {
+                        throw new Error("这不是一个todo配置文件")
+                    }
                 } catch (err) {
-                    alert(err);
+                    alert("出错了:" + err);
                 }
+            } else {
+                alert("这不是一个json文件");
             }
         };
 
@@ -28,8 +33,12 @@ class Header extends React.Component {
     }
     //保存数据文件
     saveFile() {
-        const list = this.props.todo.current.getList();
-        const blob = new Blob([list], { type: 'application/json' });
+        const list = this.props.getList();
+        const data = {
+            type: "todo",
+            list: list
+        }
+        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
@@ -59,6 +68,11 @@ class Header extends React.Component {
             </div>
         )
     }
-}
+};
+
+Header.PropTypes = {
+    saveList: PropTypes.func.isRequired,
+    getList: PropTypes.func.isRequired
+};
 
 export default Header;

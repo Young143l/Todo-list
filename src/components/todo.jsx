@@ -25,7 +25,7 @@ class Todo extends React.Component {
 
     //获取数据
     getList = () => {
-        const list = localStorage.getItem('List');
+        const list = JSON.parse((localStorage.getItem('List')));
         return list;
     }
 
@@ -81,7 +81,7 @@ class Todo extends React.Component {
     componentDidMount() {
         const list = this.getList();
         if (list) {
-            this.setState({ list: JSON.parse(list) });
+            this.setState({ list });
         }
     }
 
