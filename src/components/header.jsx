@@ -70,7 +70,7 @@ class Header extends React.Component {
     }
 };
 
-Header.PropTypes = {
+Header.propTypes = {
     saveList: PropTypes.func.isRequired,
     getList: PropTypes.func.isRequired
 };
